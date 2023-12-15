@@ -1,0 +1,10 @@
+{
+  "title": "Sign Up",
+  "name": "Name:",
+  "id": "ID:",
+  "password": "Password:",
+  "role": "Role:",
+  "user": "User",
+  "hotel_admin": "Hotel Administrator",
+  "submit": "Sign Up"
+}
