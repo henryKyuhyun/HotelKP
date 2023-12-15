@@ -25,6 +25,6 @@
 </div>
 <div>
   ![구현 이미지](url올려야함)
-  <a href="동영상 링크" target="_blank"><img src="썸네일 이미지 URL" alt="동영상링크올려야함"></a>
+  https://pgmjun.tistory.com/48 (동영상 gif파일로 바꿔서 할 예정)
 </div>
 
