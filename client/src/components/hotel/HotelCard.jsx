@@ -23,7 +23,6 @@ export default function HotelCard({ hotel, showEditButton, onEditButtonClick, on
           return parsedImages;
         }
       } else {
-        // return [imagePath.replace('hotelImage/', '')];
         return [imagePath];
       }
     }
@@ -62,7 +61,9 @@ export default function HotelCard({ hotel, showEditButton, onEditButtonClick, on
         <Like hotel_id={hotel.hotel_id} hotel_owner_id={hotel.user_id} />
       </HotelImageWrapper>
       <HotelName>상호명: {hotel.hotelName}</HotelName>
-      <FaStar color="ffd700" fontSize="18px" />
+      {/* TODO : 여기 2 , color랑 Fontsize 를..Stylecomponent..에 직접?? */}
+      {/* <FaStar color="ffd700" fontSize="18px" /> */}
+      <FaStar style={{color:"#ffd700" , fontSize:"18px"}}/>
           {
             (hotel.average_score === null ? 0 : hotel.average_score)
           }
@@ -77,7 +78,9 @@ export default function HotelCard({ hotel, showEditButton, onEditButtonClick, on
 
       <IndicatorHotelCard>
         {imagePaths.map((_,index) => (
-        <Dot key={index} active={currentIndex === index} onClick={() => setCurrentIndex(index)} />
+          // TODO : 여기1
+        <Dot key={index} $active={currentIndex === index} onClick={() => setCurrentIndex(index)} />
+        // <Dot key={index} className={currentIndex === index ? "active":""} onClick={() => setCurrentIndex(index)} />
         ))}
       </IndicatorHotelCard>
       </div>

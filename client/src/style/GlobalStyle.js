@@ -109,13 +109,13 @@ const GlobalStyle = createGlobalStyle`
     top: 40px;
     }
 
-   .react-datepicker__month-container {
-     margin: auto;
-   }
+  .react-datepicker__month-container {
+    margin: auto;
+  }
 
-   .react-datepicker__day--outside-month {
-     visibility: hidden;
-   }
+  .react-datepicker__day--outside-month {
+    visibility: hidden;
+  }
 `;
 
   export default GlobalStyle;

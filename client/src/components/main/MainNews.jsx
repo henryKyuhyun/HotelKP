@@ -2,6 +2,10 @@ import React from 'react';
 import { NewsLayout, NewsTitle, NewsList, NewsItem, NewsLink,FeedContainer, FeedTitle, FeedContent } from "./MainNewsStyle";
 
 export default function MainNews() {
+  const KANG_MAIN_IMG = process.env.REACT_APP_KANG_MAIN_IMG;
+  const PARK_MAIN_IMG = process.env.REACT_APP_PARK_MAIN_IMG;
+  // const TESTURI = 'https://southkoreahotelprojectserver.s3.ap-northeast-2.amazonaws.com/Hotel_Default_Photos/Park.jpeg';
+
   return (
     <NewsLayout>
       <NewsTitle>누구업소 news</NewsTitle>
@@ -9,7 +13,8 @@ export default function MainNews() {
       <NewsList>
         <NewsItem>
           <NewsLink to="/">
-            <img src={require("../../assets/Park.jpeg")}  alt="news" />
+            {/* <img src={require("../../assets/Park.jpeg")}  alt="news" /> */}
+            <img src={PARK_MAIN_IMG} alt="kyuhyunPhoto" />
             <FeedContainer>
                 <FeedTitle>누구업소??</FeedTitle>
                 <FeedContent>똑똑 거기 누구업소</FeedContent>
@@ -18,7 +23,9 @@ export default function MainNews() {
         </NewsItem>
         <NewsItem>
           <NewsLink to="/">
-            <img src={require("../../assets/Kang.jpeg")}  alt="news" />
+            {/* <img src={require("../../assets/Kang.jpeg")}  alt="news" /> */}
+            <img src={KANG_MAIN_IMG} alt="DayaePhoto" />
+            {/* <img src={TESTURI} alt="testuri" /> */}
             <FeedContainer>
                 <FeedTitle>누구업소??</FeedTitle>
                 <FeedContent>똑똑 거기 누구업소</FeedContent>
