@@ -26,5 +26,11 @@
 <div>
   ![구현 이미지](url올려야함)
   https://pgmjun.tistory.com/48 (동영상 gif파일로 바꿔서 할 예정)
+  <div>
+<img width="1350" alt="Screenshot 2023-12-21 at 4 57 42 pm" src="https://github.com/henryKyuhyun/HotelKP/assets/118201123/d682c901-7d84-448b-8527-7b31a3ab56cb">
+<img width="1440" alt="Screenshot 2023-12-21 at 3 42 36 pm" src="https://github.com/henryKyuhyun/HotelKP/assets/118201123/ee3d1ac1-08d4-4370-9c95-95cce178c07b">
+
+    
+  </div>
 </div>
 
