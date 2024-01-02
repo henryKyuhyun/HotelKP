@@ -47,7 +47,6 @@ app.use("/api", notification);
 app.use("/api", register);
 app.use("/api", searchBar);
 app.use("/api", compareHotel);
-
 app.use('/api',myProfile);
 
 const myProfilePath = path.join(__dirname, "myProfile");
@@ -68,8 +67,6 @@ process.on('uncaughtException', function (err) {
   console.error(err);
   console.error("Node NOT Exiting...");//receiverId 가 정의되지않았을때.
 });
-
-
 
 
 const port = 4000;

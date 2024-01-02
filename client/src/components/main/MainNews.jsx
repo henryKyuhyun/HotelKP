@@ -4,7 +4,6 @@ import { NewsLayout, NewsTitle, NewsList, NewsItem, NewsLink,FeedContainer, Feed
 export default function MainNews() {
   const KANG_MAIN_IMG = process.env.REACT_APP_KANG_MAIN_IMG;
   const PARK_MAIN_IMG = process.env.REACT_APP_PARK_MAIN_IMG;
-  // const TESTURI = 'https://southkoreahotelprojectserver.s3.ap-northeast-2.amazonaws.com/Hotel_Default_Photos/Park.jpeg';
 
   return (
     <NewsLayout>

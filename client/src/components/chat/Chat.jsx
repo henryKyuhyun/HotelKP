@@ -8,7 +8,7 @@ import { ChatContainer, ChatRoomContainer, MessagesContainer, MessageInput, Mess
 
 const ENDPOINT = "http://localhost:4000"; 
 
-export default function Chat() {
+export default function Chat({ isChatOpen, handleChatClose }) {
   const [message, setMessage] = useState('');
   const [socket, setSocket] = useState(null);
   const [response, setResponse] = useState({});
@@ -17,7 +17,9 @@ export default function Chat() {
   const [connectedUsers, setConnectedUsers] = useState([]);
   const [activeChatRoomId, setActiveChatRoomId] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [chatRooms, setChatRooms] = useState({}); // Add this line
+  const [chatRooms, setChatRooms] = useState({}); 
+
+  const [chatOpen, setChatOpen] = useState(true);
 
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT); 
@@ -33,7 +35,6 @@ export default function Chat() {
 
       setChatRooms((prevChatRooms) => ({
         ...prevChatRooms,
-        // [message.chatRoomId]: [...(prevChatRooms[message.chatRoomId] || []), { userId: message.userId, role: userRole, message: message.message }],
         [message.chatRoomId]: [...(prevChatRooms[message.chatRoomId] || []), { userId: message.userId, role: userRole === 'user' ? 'user' : 'hotel_admin', message: message.message }],
 
       }));
@@ -125,6 +126,8 @@ const isAdmin = userRole === "site_admin";
 
 return (
   <ChatContainer isSiteAdmin={isAdmin}>
+      {isChatOpen ? (
+        <>
     <ChatRoomContainer isSiteAdmin={isAdmin}>
       {/* Render Site Admin chat buttons for Users */}
       {isAdmin && renderSiteAdminChatButtons()}
@@ -169,6 +172,11 @@ return (
     <SendMessageButton onClick={sendMessage}>Send</SendMessageButton>
   </MessageInputContainer>
 </MessagesContainer>
+<button onClick={handleChatClose}>닫기</button>
+</>
+    ) : null}
+
   </ChatContainer>
+
 );
 }

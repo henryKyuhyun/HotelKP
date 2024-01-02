@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { CustomContainer, FormControlContainer, FormInput, FormLabel, FormTitle, LoginFormContainer, SubmitButton } from '../components/pagestyles/LoginPageStyles';
+import { CustomContainer, FormControlContainer, FormInput, FormLabel, FormTitle, LoginFormContainer, SubmitButton } from '../components/pagestyles/LoginPageStyle';
 import { useTranslation } from 'react-i18next';
 // import { useLanguage } from '../contexts/LanguageContext';
 

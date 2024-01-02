@@ -42,15 +42,15 @@ router.post("/login", (req, res) => {
       const accessToken = jwt.sign({ id: user.user_id,role: user.user_role }, secretText, {
         expiresIn: "30m",
       });
-      console.log('Access token:', accessToken); // <- Add this line
+      console.log('Access token:', accessToken);
       // JWT 를 이용해 refreshToken 도 생성
       const refreshToken = jwt.sign({ id: user.user_id }, refreshSecretText, {
         expiresIn: "7d",
       });
-      console.log('Refresh token:', refreshToken); // <- Add this line
+      console.log('Refresh token:', refreshToken);
 
       refreshTokens.push(refreshToken);
-      console.log('Refresh token:', refreshToken); // <- Add this line
+      console.log('Refresh token:', refreshToken);
 
       // refreshtoken 을 쿠키에 넣어주기
       res.cookie("jwt", refreshToken, {
