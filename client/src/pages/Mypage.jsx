@@ -134,14 +134,12 @@ return (
     </MypageInfo>
 
 
-    <div>
-      {userRole === 'hotel_admin' && <IntroductionPage/ >}
-    </div>
 
     <div>
-      <h2>비밀번호 변경</h2>
-      <ChangePasswordForm />
+    {userRole === 'hotel_admin' && <IntroductionPage/ >}
     </div>
+
+
 
 
     <ActivitySelectBox>
@@ -175,6 +173,19 @@ return (
           <div>
             <PencilIcon/>
             작성한
+          </div>
+        </ActivitySelectItem>
+
+        <ActivitySelectItem onClick={() => scrollTo('hotelComments')}>
+          <div>
+            <PencilIcon/>
+            
+            
+          비밀번호 변경
+          <ChangePasswordForm />
+    
+
+
           </div>
         </ActivitySelectItem>
 
