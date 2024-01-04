@@ -17,18 +17,24 @@ export const authSlice = createSlice({
       state.userRole = action.payload.userRole;
       state.userId = action.payload.userId;
       state.token = action.payload.token;
-
     },
     logout: (state) => {
       state.isLoggedIn = false;
       state.userRole = "";
       state.userId = "";
       state.token="";
-
+      localStorage.clear();
+    },
+    withdrawal: (state) => {
+      state.isLoggedIn = false;
+      state.userRole = "";
+      state.userId="";
+      state.token="";
+      localStorage.clear();
     },
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout, withdrawal } = authSlice.actions;
 
 export default authSlice.reducer;

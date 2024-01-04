@@ -1,31 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react';
-import BannerPhoto from './../../../assets/bannerPhotos/BannerPhoto.png';
-import hotelRoom from './../../../assets/bannerPhotos/hotelRoom.png';
-import hotelRoom2 from './../../../assets/bannerPhotos/hotelRoom2.png';
-import Pool from './../../../assets/bannerPhotos/Pool.png';
-import Rounge from './../../../assets/bannerPhotos/Rounge.png';
-import Rounge2 from './../../../assets/bannerPhotos/Rounge2.png';
-import Stairs from './../../../assets/bannerPhotos/Stairs.png';
 import {SliderWrap,Slider,SliderItem,SliderImage,PrevButton,NextButton,Indicator,Dot} from './BannerStyle';
 
 const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-    
-  const images = [
-    BannerPhoto,
-    hotelRoom,
-    hotelRoom2,
-    Pool,
-    Rounge,
-    Rounge2,
-    Stairs
+
+  const awsImages = [
+    process.env.REACT_APP_BANNER_PHOTO_STAIRS,
+    process.env.REACT_APP_BANNER_PHOTO_HOTELROOM2,
+    process.env.REACT_APP_BANNER_PHOTO_HOTELROOM,
+    process.env.REACT_APP_BANNER_PHOTO_POOL,
+    process.env.REACT_APP_BANNER_PHOTO_ROUNGE,
+    process.env.REACT_APP_BANNER_PHOTO_BANNERPHOTO,
+    process.env.REACT_APP_BANNER_PHOTO_ROUNGE2
   ];
 
   const moveToRight = () => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
+    setCurrentIndex((prev) => (prev + 1) % awsImages.length);
   };
   const moveToLeft = () => {
-    setCurrentIndex((prev) => (prev - 1 < 0 ? images.length - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev - 1 < 0 ? awsImages.length - 1 : prev - 1));
   };
 
   useEffect(() => {
@@ -36,9 +29,9 @@ const Banner = () => {
   return (
     <SliderWrap>
       <Slider style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-        {images.map((image, index) => (
+        {awsImages.map((awsImages, index) => (
           <SliderItem key={index}>
-            <SliderImage src={image} alt={`slide-${index}`} />
+            <SliderImage src={awsImages} alt={`slide-${index}`} />
           </SliderItem>
         ))}
       </Slider>
@@ -47,10 +40,12 @@ const Banner = () => {
       <NextButton onClick={moveToRight}>{">"}</NextButton>
   
       <Indicator>
-        {images.map((_, index) => (
-          <Dot key={index} active={currentIndex === index} />
+        {awsImages.map((_, index) => (
+          <Dot key={index} $active={currentIndex === index} />
         ))}
       </Indicator>
+
+
     </SliderWrap>
   );
 

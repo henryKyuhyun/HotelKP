@@ -4,11 +4,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { useNavigate } from "react-router-dom";
-import { CustomContainer, FormControlContainer, FormInput, FormLabel, FormTitle, LoginFormContainer, SubmitButton } from '../components/pagestyles/LoginPageStyles';
+import { CustomContainer, FormControlContainer, FormInput, FormLabel, FormTitle, LoginFormContainer, SubmitButton } from '../components/pagestyles/LoginPageStyle';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../redux/slice/authSlice';
 import { fetchUserLikes } from '../redux/slice/likeSlice';
-import { setupNotification } from '../services/notifications'; 
+import { setupNotification } from '../services/notifications';
 
 export default function LoginPage() {
   const [id, setId] = useState('');

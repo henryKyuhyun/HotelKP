@@ -66,8 +66,10 @@ export const Indicator = styled.div`
 export const Dot = styled.div`
   width: 10px;
   height: 10px;
-  border-radius: 50%; //이부분으로원형을만든거임.
-  background-color: ${({ active }) => (active ? "black" : "white")};
+  border-radius: 50%;
+  /* background-color: ${({ active }) => (active ? "black" : "white")}; */
+  
+  background-color: ${(props) => (props.active ? '#000':'#ccc')};
 `;
 
 

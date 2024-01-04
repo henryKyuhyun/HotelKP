@@ -8,10 +8,11 @@ import HotelDetailPage from '../pages/HotelDetailPage';
 import Mypage from '../pages/Mypage';
 import EditHotel from '../components/hotel/EditHotel';
 import CheckHotelAdminProfile from '../pages/CheckHotelAdminProfile';
-
+import Layout from '../components/shared/layout/Layout';
 const AppRouter = () => {
   return (
     <BrowserRouter>
+    <Layout>
         <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/login" element={<LoginPage />} />
@@ -22,8 +23,8 @@ const AppRouter = () => {
             <Route path="/mypage" element={<Mypage/>}/>
             <Route path="/editHotel/:hotelId" element={<EditHotel />}/>
             <Route path="/adminProfile/:userId" element={<CheckHotelAdminProfile />} />
-          
         </Routes>
+      </Layout>
     </BrowserRouter>
   );
 };

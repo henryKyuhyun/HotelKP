@@ -2,12 +2,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { HotelListContainer } from "../components/pagestyles/HotelListStyles";
+import { HotelListContainer, HotelListWrapper, HotelSortButton, HotelSortContainer, Line } from "../components/pagestyles/HotelListStyle";
 import HotelCard from '../components/hotel/HotelCard';
-import SearchBar from "../components/hotel/search/Searchbar";
+import SearchBar from "../components/hotel/search/SearchBar";
 import HotelComparison from "../components/hotel/comparison/HotelComparison";
 import MainCategory from "../components/main/MainCategory";
-import Header from "../components/shared/header/Header";
 
 export default function HotelListPage() {
   const { accommodationType } = useParams();
@@ -17,6 +16,7 @@ export default function HotelListPage() {
   const [selectedHotelIds, setSelectedHotelIds] = useState([]);
 
   const fetchHotels = async (type) => {
+    
     try {
       const response = await axios.get(`/api/hotelList?hotelType=${type}&searchTerm=${searchTerm}`);
       setHotels(response.data);
@@ -38,6 +38,11 @@ export default function HotelListPage() {
     fetchHotels(accommodationType);
   }, [accommodationType, searchTerm]);
 
+  useEffect(() => {
+    fetchHotels("all");
+  }, [searchTerm]);
+
+  
   const sortHotels =(property)=> {
     let copy = [...hotels]
     copy.sort((a,b)=> {
@@ -49,10 +54,18 @@ export default function HotelListPage() {
 
   return (
     <HotelListContainer>
-      <Header/>
       <SearchBar onSearch={setSearchTerm} />
       <MainCategory />
 
+      <Line />
+
+      <HotelSortContainer>
+        <HotelSortButton onClick={() => sortHotels('comments')}>댓글순</HotelSortButton>
+        <HotelSortButton onClick={() => sortHotels('average_score')}>별점순</HotelSortButton>
+        <HotelSortButton onClick={() => sortHotels('price')}>가격순</HotelSortButton>
+      </HotelSortContainer>
+
+      <HotelListWrapper>
       {hotels.map((hotel) => (
         <HotelCard
           key={hotel.hotel_id}
@@ -63,9 +76,7 @@ export default function HotelListPage() {
         />
       ))}
       {error && <p>{error}</p>}
-      <button onClick={() => sortHotels('comments')}>댓글순</button>
-      <button onClick={() => sortHotels('average_score')}>별점순</button>
-      <button onClick={() => sortHotels('price')}>가격순</button>
+      </HotelListWrapper>
       
         <HotelComparison selectedHotelIds={selectedHotelIds} />
     </HotelListContainer>

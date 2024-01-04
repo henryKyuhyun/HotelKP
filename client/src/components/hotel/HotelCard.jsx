@@ -8,7 +8,10 @@ import {
   HotelName,
   HotelPrice,
   ViewDetailsLink,
-} from '../pagestyles/HotelListStyles';
+  ImageLeftButton,
+  ImageRightButton,
+  HotelAverage,
+} from '../pagestyles/HotelListStyle';
 import Like from '../shared/like/Like';
 import { FaStar } from 'react-icons/fa';
 import { Dot, Indicator, IndicatorHotelCard } from '../shared/banner/BannerStyle';
@@ -23,7 +26,6 @@ export default function HotelCard({ hotel, showEditButton, onEditButtonClick, on
           return parsedImages;
         }
       } else {
-        // return [imagePath.replace('hotelImage/', '')];
         return [imagePath];
       }
     }
@@ -48,41 +50,42 @@ export default function HotelCard({ hotel, showEditButton, onEditButtonClick, on
     }
   };
 
-  return (
-    <HotelContainer key={hotel.hotel_id}>
-      <button onClick={moveToLeft}> {"<"} </button>
-      <div style={{ position: "relative" }}> 
+return (
+  <HotelContainer key={hotel.hotel_id}>
+    <HotelImageWrapper>
+    <ImageLeftButton onClick={moveToLeft}> {"<"} </ImageLeftButton>
 
-      <HotelImageWrapper>
-        
-        {/* HotelImage 에 onClick moveToRight 을 넣어서 사진을 클릭해도 가능하게  */}
-        {/* <HotelImage src={`/hotelImage/${imagePaths[currentIndex]}`} alt={hotel.hotelName} onClick={moveToRight} />   */}
-        <HotelImage src={imagePaths[currentIndex]} alt={hotel.hotelName} onClick={moveToRight} />
+      {/* HotelImage 에 onClick moveToRight 을 넣어서 사진을 클릭해도 가능하게  */}
+      {/* <HotelImage src={`/hotelImage/${imagePaths[currentIndex]}`} alt={hotel.hotelName} onClick={moveToRight} />   */}
+      <HotelImage src={imagePaths[currentIndex]} alt={hotel.hotelName} onClick={moveToRight} />
 
-        <Like hotel_id={hotel.hotel_id} hotel_owner_id={hotel.user_id} />
-      </HotelImageWrapper>
-      <HotelName>상호명: {hotel.hotelName}</HotelName>
-      <FaStar color="ffd700" fontSize="18px" />
-          {
-            (hotel.average_score === null ? 0 : hotel.average_score)
-          }
-      <HotelAddress>주소: {hotel.hotelAddress}</HotelAddress>
-      <HotelPrice>가격: {hotel.price}</HotelPrice>
-      <ViewDetailsLink to={`/hotel/${hotel.hotel_id}`}>상세보기👀</ViewDetailsLink>
-      <input type="checkbox" checked={isSelected} onChange={handleSelect} disabled={selectedHotelIds.length >= 3 && !isSelected} />
-      Select
-      {showEditButton && (
-        <button onClick={() => onEditButtonClick(hotel.hotel_id)}>수정</button>
-      )}
-
+      <Like hotel_id={hotel.hotel_id} hotel_owner_id={hotel.user_id} />
+      <ImageRightButton  onClick={moveToRight}>{">"}</ImageRightButton>
       <IndicatorHotelCard>
-        {imagePaths.map((_,index) => (
-        <Dot key={index} active={currentIndex === index} onClick={() => setCurrentIndex(index)} />
-        ))}
-      </IndicatorHotelCard>
-      </div>
-      <button onClick={moveToRight}>{">"}</button>
+      {imagePaths.map((_,index) => (
+        // TODO : 여기1
+      <Dot key={index} $active={currentIndex === index} onClick={() => setCurrentIndex(index)} />
+      // <Dot key={index} className={currentIndex === index ? "active":""} onClick={() => setCurrentIndex(index)} />
+      ))}
+    </IndicatorHotelCard>
+    </HotelImageWrapper>
+    <HotelName>상호명: {hotel.hotelName}</HotelName>
+    <HotelAverage>
+        <FaStar color="ffd700" fontSize="18px" margin-right="5px"/>
+        <span>
+          {
+            hotel.average_score === null ? 0 : hotel.average_score
+          }
+        </span>
+      </HotelAverage>
 
-    </HotelContainer>
-  );
+    <HotelAddress>주소: {hotel.hotelAddress}</HotelAddress>
+    <HotelPrice>₩{hotel.price}/박</HotelPrice>
+    <ViewDetailsLink to={`/hotel/${hotel.hotel_id}`}>상세보기👀</ViewDetailsLink>
+    <input type="checkbox" checked={isSelected} onChange={handleSelect} disabled={selectedHotelIds.length >= 3 && !isSelected} />
+    {showEditButton && (
+      <button onClick={() => onEditButtonClick(hotel.hotel_id)}>비교하기</button>
+    )}
+  </HotelContainer>
+);
 }

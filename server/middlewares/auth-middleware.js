@@ -1,3 +1,4 @@
+//server/middlewares/auth-middleware.js 
 const jwt = require("jsonwebtoken");
 const secretText = "superSecret";
 

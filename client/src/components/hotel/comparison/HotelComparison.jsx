@@ -1,7 +1,7 @@
 // client/src/components/hotel/comparison/HotelComparison.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
-import { ComparisonButton, ComparisonContainer, ComparisonTitle, HotelCardPart } from '../../pagestyles/HotelListStyles';
+import { ComparisonButton, ComparisonContainer, ComparisonTitle, HotelCardPart } from '../../pagestyles/HotelListStyle';
 
 const HotelComparison = ({ selectedHotelIds }) => {
   const [comparisonResults, setComparisonResults] = useState([]);
