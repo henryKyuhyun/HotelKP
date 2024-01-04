@@ -9,14 +9,10 @@ export const ChatContainer = styled.div`
   bottom: ${({ isSiteAdmin }) => (isSiteAdmin ? 'auto' : '60px')};
   width: ${({ isSiteAdmin }) => (isSiteAdmin ? 'auto' : '100vh')};
   position: relative;
-  /* height: ; */
   right: auto;
-  /* bottom: 60px; */
   right: 50px;
   width: auto;
   margin-top: 60px;
-  /* align-self: flex-end; 새로 추가한 코드 */
-
 `;
 
 export const ChatRoomContainer = styled.div`

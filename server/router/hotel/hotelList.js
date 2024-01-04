@@ -7,13 +7,14 @@ router.get("/hotelList", (req, res) => {
   const { hotelType, searchTerm } = req.query;
   let query =
     "SELECT hotels.hotel_id, hotelName, hotelType, hotelAddress, price, hotelImages, average_score FROM hotels LEFT JOIN comments ON hotels.hotel_id = comments.hotel_id";
-
-  if (hotelType !== "all") {
+  
+  if (hotelType && hotelType !== "all") {
     query += ` WHERE hotelType = '${hotelType}'`;
-  }
-
-  if (searchTerm) {
-    query += ` AND hotelName LIKE '%${searchTerm}%'`;
+    if (searchTerm) {
+      query += ` AND hotelName LIKE '%${searchTerm}%'`;
+    }
+  } else if (searchTerm) {
+    query += ` WHERE hotelName LIKE '%${searchTerm}%'`;
   }
 
   db.query(query, (error, result) => {
@@ -40,11 +41,9 @@ router.get("/hotelList", (req, res) => {
               created_at: row.comment_created_at
           });
       }
-    // res.status(200).json(result);
   });
   const hotelList = Object.values(hotels);
   res.status(200).json(hotelList);
-
   })
 });
 

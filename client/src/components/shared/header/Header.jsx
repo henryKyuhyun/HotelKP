@@ -12,6 +12,7 @@ import {
   AccommdationStyle,
 } from "./HeaderStyle";
 import { resetLikes } from "../../../redux/slice/likeSlice";
+import Withdrawal from '../../hotel/users/WithdrawalPart';
 
 export default function Header() {
   const isLoggedIn = useSelector((state) => state.auth?.isLoggedIn);
@@ -59,6 +60,7 @@ export default function Header() {
         )}
         {isLoggedIn && (
           <>
+              <Withdrawal />
               <CenteredLink onClick={handleLogout} style={{cursor: 'pointer'}}>로그아웃</CenteredLink>
               <CenteredLink to="/mypage">마이페이지</CenteredLink>
             {userRole === "hotel_admin" && (
