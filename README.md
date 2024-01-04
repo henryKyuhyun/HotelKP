@@ -8,13 +8,16 @@
     <li>React</li>
     <li>Node.js</li>
     <li>Redux</li>
+    <li>AWS</li>
+    <li>WebSocket</li>
+    <li>Iam</li>
   </ul>
 </div>
 <p>✨ 주요기능:</p>
 <div>
   <ul>
     <li>로그인 회원가입 : JWT 를 이용하여 Security 를 적용하였습니다</li>
-    <li>KR ->EN 번영기능을 적용하였습니다</li>
+    <li>KR ->EN 번역 기능을 적용하였습니다</li>
     <li>숙박업소 업로드 : 이미지를 같이 업로드가능하게 구현하였습니다</li>
     <li>숙박업소 이미지 AWS S3 : 숙박업소의 이미지들은 AWS S3의 버켓으로 업로드되고 DB에는 URI 가 저장됩니다</li>
     <li>숙박업소 예약 : 원하는 숙박업소를 선택하고 예약할 수 있습니다</li>
