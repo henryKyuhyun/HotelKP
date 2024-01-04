@@ -6,6 +6,7 @@ const http = require('http');
 const app = express();
 const join = require("./router/members/join");
 const login = require("./router/members/login");
+const logout = require("./router/members/logout");
 const uploadHotel = require("./router/hotel/uploadHotel");
 const hotelList = require("./router/hotel/hotelList");
 const hotelDetail = require("./router/hotel/hotelDetail");
@@ -16,6 +17,7 @@ const editHotel = require("./router/hotel/editHotel");
 const hotelPayment = require('./router/hotel/hotelPayment');
 const notification = require("./router/notification/notification");
 const register = require("./router/notification/register");
+const withdrawal = require('./router/members/withdrawal');
 
 const myProfile = require('./router/members/myProfile');
 const searchBar = require('./router/search/search');
@@ -25,7 +27,7 @@ const compareHotel = require('./router/hotel/compareHotel');
 app.use(cors({
   credentials: true,
   origin: "http://localhost:3000", // React 앱에서의 요청 허용
-  methods: ["GET", "POST"],
+  methods: ["GET", "POST","DELETE","PUT"],
 }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -48,6 +50,8 @@ app.use("/api", register);
 app.use("/api", searchBar);
 app.use("/api", compareHotel);
 app.use('/api',myProfile);
+app.use('/api', withdrawal);
+app.use('/api', logout);
 
 const myProfilePath = path.join(__dirname, "myProfile");
 app.use("/myProfile", express.static(myProfilePath));

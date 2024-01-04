@@ -57,51 +57,6 @@ export default function Mypage() {
     element.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
-//     return (
-//       <MypageLayout>
-//         <h1>My page</h1>
-
-//         <div>
-//           {userRole === 'hotel_admin' && <IntroductionPage/ >}
-//         </div>
-//         <div>
-//           <h2>비밀번호 변경</h2>
-//           <ChangePasswordForm />
-//         </div>
-//         <div>
-//         <HotelReservation/>
-
-//         </div>
-//         <HotelListContainer>
-//         <h2>관심 호텔</h2>
-//           {likeHotels.map((hotel)=> <HotelCard key={hotel.hotel_id} hotel={hotel}/>)}
-//         </HotelListContainer>
-
-
-// <HotelListContainer>
-//   <h2>호텔리스트</h2>
-//   {myHotelList.map((hotel) => (
-//     <HotelCard
-//       hotel={hotel}
-//       showEditButton={userRole === 'hotel_admin'}
-//       onEditButtonClick={handleEditButtonClick}
-//     />
-//   ))}
-// <div>호텔등록자프로필확인<CheckHotelAdminProfile/></div>
-  
-// </HotelListContainer>
-
-// <div>
-//           <h2>나의 후기</h2>
-//           {userComments ? userComments.map((comment) => (
-//             <CommentCard key={comment.id} comment={comment} />
-//           )) : <p>Loading...</p>}
-//         </div>
-//       </>
-//   );
-// }
-
-
 return (
   <MypageLayout>
     <h1>마이페이지</h1>
@@ -132,16 +87,9 @@ return (
       </InfoItemBox>
       <InfoBox/>                
     </MypageInfo>
-
-
-
     <div>
     {userRole === 'hotel_admin' && <IntroductionPage/ >}
     </div>
-
-
-
-
     <ActivitySelectBox>
       <h2>나의 활동</h2>
       <ActivitySelectItems>
@@ -176,12 +124,9 @@ return (
           </div>
         </ActivitySelectItem>
 
-        <ActivitySelectItem onClick={() => scrollTo('hotelComments')}>
+        <ActivitySelectItem>
           <div>
             <PencilIcon/>
-            
-            
-          비밀번호 변경
           <ChangePasswordForm />
     
 
