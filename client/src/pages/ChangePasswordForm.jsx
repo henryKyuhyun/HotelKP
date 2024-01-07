@@ -49,8 +49,7 @@ export default function ChangePasswordForm () {
         alert('서버오류입니다!!!!!')
       }
     }
-    setModalIsOpen(false); // 비밀번호 변경이 완료되면 모달 팝업을 닫습니다.
-
+    setModalIsOpen(false);
   }
 
 return (
