@@ -4,7 +4,9 @@ import Modal from 'react-modal';
 
 export const ChangePWBtn = styled.button`
   flex-grow: 1;
-
+  font-size: 20px;
+  font-weight: 500;
+  white-space: nowrap;
 div{
   flex-grow: 1;
   text-align: center;
@@ -12,6 +14,7 @@ div{
   display: flex;
   padding: 9px 30px;
   border-radius: 40px;
+
 }
 
 &:hover {
@@ -46,6 +49,7 @@ export const PStyled = styled.p`
   font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: 20px;
+  
 `;
 
 export const LabelStyle = styled.label`

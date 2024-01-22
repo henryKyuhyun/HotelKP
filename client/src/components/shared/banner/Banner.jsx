@@ -27,6 +27,7 @@ const Banner = () => {
   }, []);
 
   return (
+    <>
     <SliderWrap>
       <Slider style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
         {awsImages.map((awsImages, index) => (
@@ -44,9 +45,9 @@ const Banner = () => {
           <Dot key={index} $active={currentIndex === index} />
         ))}
       </Indicator>
-
-
     </SliderWrap>
+    
+    </>
   );
 
 };

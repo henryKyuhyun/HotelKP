@@ -4,11 +4,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { useNavigate } from "react-router-dom";
-import { CustomContainer, FormControlContainer, FormInput, FormLabel, FormTitle, LoginFormContainer, SubmitButton } from '../components/pagestyles/LoginPageStyle';
+import { CustomContainer, FormControlContainer, FormInput, FormLabel, LoginFormContainer, SubmitButton } from '../components/pagestyles/LoginPageStyle';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../redux/slice/authSlice';
 import { fetchUserLikes } from '../redux/slice/likeSlice';
 import { setupNotification } from '../services/notifications';
+import { AccommdationStyle, HeaderMain, LinkTitle } from '../components/shared/header/HeaderStyle';
 
 export default function LoginPage() {
   const [id, setId] = useState('');
@@ -64,11 +65,15 @@ export default function LoginPage() {
   
   return (
     <CustomContainer>
+      
       <LoginFormContainer onSubmit={handleSubmit}>
-        <FormTitle>로그인</FormTitle>
+      <LinkTitle to="/">
+        <HeaderMain>누구업소</HeaderMain>
+        <AccommdationStyle>ACCOMMODATION</AccommdationStyle>
+      </LinkTitle>
         <FormControlContainer>
           <FormLabel htmlFor='userId'>아이디:</FormLabel>
-          <FormInput id='userId' type="text" value={id} onChange={(e) => setId(e.target.value)} />
+          <FormInput id='userId' type="text" value={id} onChange={(e) => setId(e.target.value)} placeholder='ID를 입력해주세요'/>
         </FormControlContainer>
         <FormControlContainer>
           <FormLabel htmlFor='password'>비밀번호:</FormLabel>
@@ -77,6 +82,7 @@ export default function LoginPage() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder='password를 입력해주세요'
           />
         </FormControlContainer>
         <SubmitButton type="submit">로그인</SubmitButton>

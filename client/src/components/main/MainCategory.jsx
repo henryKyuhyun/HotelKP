@@ -1,13 +1,12 @@
 import React from 'react';
 import { CategoryLayout, CategoryContainer, CategoryLink,CategoryTitle }from "./MainCategoryStyle";
 
-export default function MainCategory() {
+export default function MainCategory({ bgColor }) {
     return (
-        <CategoryLayout>
+        <CategoryLayout bgColor={bgColor}>
             <CategoryContainer>
             <CategoryLink to="/hotelList/all">
                 <img src={require("../../assets/List.png")}  alt="List" />
-                
                 <CategoryTitle>전체 보기</CategoryTitle>
             </CategoryLink>
             </CategoryContainer>
@@ -29,7 +28,6 @@ export default function MainCategory() {
                     <CategoryTitle>펜션</CategoryTitle>
                 </CategoryLink>
             </CategoryContainer>
-
         </CategoryLayout>
     );
 }

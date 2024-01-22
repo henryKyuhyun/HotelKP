@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withdrawal } from '../../../redux/authAction';
+import {  CenteredLinkForBtn } from '../../shared/header/HeaderStyle';
 
 
 export default function WithdrawalPart() {
@@ -20,9 +21,9 @@ export default function WithdrawalPart() {
   // 로그인된 사용자에게만 탈퇴 버튼을 보여줍니다
   return (
     isLoggedIn && (
-      <button onClick={handleWithdrawal}>
+      <CenteredLinkForBtn onClick={handleWithdrawal}>
         회원탈퇴
-      </button>
+      </CenteredLinkForBtn>
     )
   );
 }

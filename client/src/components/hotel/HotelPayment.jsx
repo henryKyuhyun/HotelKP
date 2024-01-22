@@ -2,14 +2,21 @@ import React, { useState } from "react";
 import PaymentButton from "../shared/payment/Payment";
 import axios from "axios";
 import DatePicker from "./datepicker/DayPicker";
+import { useDispatch, useSelector } from 'react-redux';
+import { postPayment } from '../../redux/slice/paymentSlice'; 
 import {AiOutlineMinusSquare , AiOutlinePlusSquare, AiOutlineCalendar} from 'react-icons/ai'
-import { PaymentContainer, PaymentInfo, PaymentLabel } from "../pagestyles/HotelPaymentStyle";
+import {PaymentLabel,
+        PaymentContainer,
+        PaymentInfo
+        } from '../pagestyles/HotelPaymentStyle'
 
 export default function HotelPayment({ hotel }) {
   const Token = sessionStorage.getItem("accessToken");
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-  const MaxGuests = hotel.maxGuests;
+  const dispatch = useDispatch();
+  const paymentStatus = useSelector(state => state.payment.status);
 
+  const MaxGuests = hotel.maxGuests;
   const [paymentType, setPaymentType] = useState("카드");
   const [guests, setGuests] = useState(1);
   const [dateInput, setDateInput] = useState({
@@ -53,9 +60,9 @@ const calculatePrice = () => {
   return totalPrice;
 };
 
-const SubmitPayment = async(isConfirmed) => {
-  if (!isConfirmed) {
-  // 체크인과 체크아웃 날짜가 같은지 확인
+const SubmitPayment = async(isConfirmed) => {  
+   if (!isConfirmed) {
+    // 체크인과 체크아웃 날짜가 같은지 확인
     if (dateInput.startDate.getTime() === dateInput.endDate.getTime()){
       alert("체크인과 체크아웃 날짜를 확인해 주세요.");
       return false;
@@ -78,12 +85,10 @@ const SubmitPayment = async(isConfirmed) => {
       check_out: formattedCheckOut,
       guests: guests
     };
-    try {
-      await axios.post("/api/hotelPayment", paymentData,
-      {
-        headers:{ Authorization:`Bearer ${Token}` }
-      });
 
+    try {
+      await dispatch(postPayment(paymentData));
+        console.log(paymentData)
       await axios.post("/api/notification", 
       {
         title: "결제가 되었습니다.", body: `결제 정보: ${hotel.hotelName}, 금액: ${totalPrice}`, user_id: hotel.user_id
