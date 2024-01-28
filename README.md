@@ -1,40 +1,70 @@
+# Getting Started with Create React App
 
-<h1>🏨 누구업소</h1>
-<p>누구업소는 다양한 숙박업소를 검색하고 예약할 수 있는 웹사이트입니다. 사용자는 호텔, 팬션, 모텔 등 다양한 종류의 숙박업소를 한 눈에 볼 수 있으며, 원하는 숙박업소를 선택하여 예약하고 결제할 수 있습니다.</p>
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-<p>🚀 이 프로젝트는 다음 기술을 사용하였습니다:</p>
-<div>
-  <ul>
-    <li>React</li>
-    <li>Node.js</li>
-    <li>Redux</li>
-    <li>AWS</li>
-    <li>WebSocket</li>
-    <li>Iam</li>
-  </ul>
-</div>
-<p>✨ 주요기능:</p>
-<div>
-  <ul>
-    <li>로그인 회원가입 : JWT 를 이용하여 Security 를 적용하였습니다</li>
-    <li>KR ->EN 번역 기능을 적용하였습니다</li>
-    <li>숙박업소 업로드 : 이미지를 같이 업로드가능하게 구현하였습니다</li>
-    <li>숙박업소 이미지 AWS S3 : 숙박업소의 이미지들은 AWS S3의 버켓으로 업로드되고 DB에는 URI 가 저장됩니다</li>
-    <li>숙박업소 예약 : 원하는 숙박업소를 선택하고 예약할 수 있습니다</li>
-    <li>결제 기능 : 선택한 숙박업소에 대한 결제를 진행할 수 있습니다</li>
-    <li>Map API : 숙박업소의 위치를 확인 할 수 있습니다</li>
-    <li>검색기능 : 사용자 편의를 위해 검색기능을 추가하였습니다</li>
-    <li>1:1 채팅기능 : Site_Admin(사이트 관리자)와의 1대1 채팅을 통해 문의사항을 즉시 해결할 수 있습니다.</li>
-  </ul>
-</div>
-<div>
-  ![구현 이미지](url올려야함)
-  https://pgmjun.tistory.com/48 (동영상 gif파일로 바꿔서 할 예정)
-  <div>
-<img width="1350" alt="Screenshot 2023-12-21 at 4 57 42 pm" src="https://github.com/henryKyuhyun/HotelKP/assets/118201123/d682c901-7d84-448b-8527-7b31a3ab56cb">
-<img width="1440" alt="Screenshot 2023-12-21 at 3 42 36 pm" src="https://github.com/henryKyuhyun/HotelKP/assets/118201123/ee3d1ac1-08d4-4370-9c95-95cce178c07b">
+## Available Scripts
 
-    
-  </div>
-</div>
+In the project directory, you can run:
 
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

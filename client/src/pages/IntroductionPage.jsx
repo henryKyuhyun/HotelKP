@@ -41,7 +41,8 @@ export default function IntroductionPage(){
       formData.append('introText', introText);
 
       // 업로드서버에
-      await axios.post('http://localhost:4000/api/myprofile', formData);      
+      await axios.post('http://localhost:4000/api/myprofile', formData,{
+      });      
     }catch(error){
       if (error.response && error.response.data && error.response.data.message) {
         setError(error.response.data.message);

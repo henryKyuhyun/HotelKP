@@ -1,7 +1,11 @@
+
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const HotelListContainer = styled.div`
+  padding: 5rem; 
+  background-color: #f9f9f9;
+
   .span {
     text-align:center;
     color:red;
@@ -9,7 +13,6 @@ export const HotelListContainer = styled.div`
 `;
 
 export const HotelListWrapper = styled.div`
-  /* padding: 0 30px; */
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -112,8 +115,7 @@ export const HotelImageWrapper = styled.div`
         opacity: 0.8;
     }
   }
-  `;
-  
+`;
 export const HotelImage = styled.img`
   width: 100%;
   height: 100%;
@@ -134,7 +136,7 @@ export const HotelName = styled.h3`
 
 export const HotelAverage = styled.div`
   display: flex;
-  alignItems: center;
+  align-items: center;
   font-size: 1.6rem;
   font-weight: 500;
   margin: 10px 20px 10px 0;
@@ -166,15 +168,15 @@ export const ViewDetailsLink = styled(Link)`
   display: inline-block;
   margin-top: 2rem;
   margin-right: 7px;
-  background-color: #1671f9;
+  background-color: #FC5946;
   color: white;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 24px;
   text-decoration: none;
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: #125dcf;
+    background-color: #000;
   }
 `;
 
@@ -247,15 +249,14 @@ export const HotelSortContainer  = styled.div`
 export const HotelSortButton = styled.button`
   padding: 10px 20px;
   margin: 5px;
-  color: #003b95;
   font-weight: 700;
-  border: 2px solid #003b95;
+  border: 2px solid #FC5946;
   border-radius: 45px;
   cursor: pointer;
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: #1671f9;
+    background-color: #FC5946;
     color: #fff;
   }
 `;

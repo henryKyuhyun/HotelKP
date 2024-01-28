@@ -1,7 +1,6 @@
 
 // server/router/hotel/uploadHotel.js
 require('dotenv').config();
-
 const express = require("express");
 const router = express.Router();
 const db = require("../../config/database");
@@ -17,9 +16,6 @@ const multerS3 = require('multer-s3');
 // AWS 설정
 const bucketName = process.env.AWS_BUCKET_NAME;
 console.log("BUCKET NAME : : " , process.env.AWS_BUCKET_NAME);
-const region = process.env.AWS_REGION;
-const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
-const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
 
 AWS.config.update({
   region: process.env.AWS_REGION,

@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FaRegHeart } from 'react-icons/fa';
 import { FaRegCreditCard } from "react-icons/fa";
@@ -7,29 +6,13 @@ import { HiOutlinePencilSquare } from "react-icons/hi2";
 
 
 export const MypageLayout = styled.div`
-    padding: 0 70px; 
+  padding: 5rem; 
+  background-color: #f9f9f9;
 
     h1{
         margin-bottom: 2rem;
     }
 `;
-
-// export const MypageHeader = styled.div`
-// width:50px;
-// height:50px;
-// background-color: red;
-// background-image: url('../../assets/Hotel.png');
-// `;
-
-
-// export const MypageContainer = styled.div`
-//     padding: 0 70px; 
-
-//     h1{
-//         margin-bottom: 2rem;
-//     }
-// `;
-
 
 export const MypageInfo = styled.div`
   border: 2px solid #e3e3e3;
@@ -75,11 +58,8 @@ export const InfoItem = styled.div`
 
 export const InfoBox = styled.div`
   height: 40px;
-  background-color: #ecedf1;
+  background-color: #E5DCC5;
 `;
-
-
-
 
 export const ActivitySelectBox = styled.div`
   width: fit-content;
@@ -87,21 +67,19 @@ export const ActivitySelectBox = styled.div`
   display: flex;
   flex-direction: column;
   margin: 20px 0;
-  
 
   h2 {
     margin-bottom:2rem;
     white-space: nowrap;
     font-size: 20px;
-    font-wight: 700;
+    font-weight: 700;
   }
 
   div{ 
     font-size: 20px;
     font-weight: 500;
     white-space: nowrap;
-
-}
+  }
 `;
 
 export const ActivitySelectItems = styled.div`
@@ -109,9 +87,8 @@ export const ActivitySelectItems = styled.div`
   margin-right: 3rem;
   border: 1px solid #eceef9;
   border-radius: 40px;
-  background-color: #eceef9;
+  background-color: #F7DBA7;
 `;
-
 
 export const ActivitySelectItem = styled.div`
   flex-grow: 1;
@@ -126,7 +103,7 @@ export const ActivitySelectItem = styled.div`
   }
 
   &:hover {
-    background-color: #4666d8;
+    background-color: #F49D6E; 
     border-radius: 40px;
     color: #fff;
   }
@@ -186,11 +163,11 @@ export const ActivityContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 5rem 0;
-  background-color: #f4f2f3;
+  background-color: #fff;
 
   h2 {
     padding: 1.5rem;
-    background-color: #4666d8;
+    background-color: #E5DCC5;
     color : #fff;
   }
 
@@ -208,12 +185,3 @@ export const HotelDesc = styled.span`
     font-size: 15px;
     font-weight: 700;
 `;
-
-
-
-
-
-
-
-
-

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { CustomContainer, FormControlContainer, FormInput, FormLabel, FormTitle, LoginFormContainer, SubmitButton } from '../components/pagestyles/LoginPageStyle';
+import { CustomContainer, FormControlContainer, FormInput, FormLabel, FormSelect, FormTitle, LoginFormContainer, SubmitButton } from '../components/pagestyles/LoginPageStyle';
 import { useTranslation } from 'react-i18next';
 // import { useLanguage } from '../contexts/LanguageContext';
 
@@ -65,11 +65,11 @@ export default function JoinPage() {
       )}
         <FormControlContainer>
           <FormLabel htmlFor='name'>{t('name')} </FormLabel>
-          <FormInput id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
+          <FormInput id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='이름을 입력해주세요'/>
         </FormControlContainer>
         <FormControlContainer>
           <FormLabel htmlFor='id'>{t('id')} </FormLabel>
-          <FormInput id="id" type="text" value={id} onChange={(e) => setId(e.target.value)} />
+          <FormInput id="id" type="text" value={id} onChange={(e) => setId(e.target.value)}  placeholder='아이디를 입력해주세요'/>
         </FormControlContainer>
         <FormControlContainer>
           <FormLabel htmlFor='password'>{t('password')}</FormLabel>
@@ -78,11 +78,12 @@ export default function JoinPage() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder='비밀번호를 입력해주세요'
           />
         </FormControlContainer>
         <FormControlContainer>
           <FormLabel htmlFor='role'>{t('role')}</FormLabel>
-          <select
+          <FormSelect
             id='role'
             value={role}
             onChange={(e) => setRole(e.target.value)}
@@ -90,7 +91,7 @@ export default function JoinPage() {
           >
             <option value="user">{t('user')}</option>
             <option value="hotel_admin">{t('Hotel Administrator')}</option>
-          </select>
+          </FormSelect>
         </FormControlContainer>
         <SubmitButton type="submit">{t('submit')}</SubmitButton>
       </LoginFormContainer>

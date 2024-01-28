@@ -1,3 +1,5 @@
+// server/router/members/myProfile.js
+require('dotenv').config();
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
@@ -5,42 +7,64 @@ const db = require("../../config/database");
 const secretText = "superSecret";
 const jwt = require('jsonwebtoken');
 const router = express.Router();
-
+const AWS = require('aws-sdk');
+const fs = require('fs')
+const S3 = require('aws-sdk/clients/s3')
+const multerS3 = require('multer-s3');
+// const bucketName = process.env.REACT_APP_ADMIN_PROFILE;
+const bucketName = process.env.AWS_BUCKET_NAME
 // Multer 설정: 업로드된 파일을 저장할 디렉토리 및 파일명 설정
 // 이미지 저장
-const storage = multer.diskStorage({
-  //저장장소 HotelImage
-  destination: (req, file, cb) => {
-    cb(null, "myProfile");
-  },
-  filename: (req, file, cb) => {
-    console.log(file);
-    console.log('Original filename:', file.originalname);
 
-    cb(null, Date.now() + path.extname(file.originalname));
+AWS.config.update({
+  region: process.env.AWS_REGION,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+})
+const s3 = new AWS.S3();
+
+async function getBucketObjects(){
+  const params = {
+    Bucket: bucketName,
+  };
+  console.log(bucketName, "BucketNameForMyprofile")
+  
+  try {
+    const response = await s3.listObjectsV2(params).promise();
+    const objects = response.Contents;
+    console.log("Objects in the bucket:", objects);
+  } catch(error) {
+    console.error('Error retrieving bucket objects', error);
+  }
+}
+
+const upload = multerS3({
+  s3: s3,
+  bucket: bucketName,
+  acl: 'public-read-write',
+  metadata: function (req, file, cb) {
+    cb(null, {fieldName: file.fieldname});
   },
+  key: function (req, file, cb) {
+    cb(null, Date.now().toString())
+  }
 });
 
-//업로드된 파일의 MIME 타입을 체크하는 함수  "image/jpeg"
-const fileFilter = (req, file, cb) => {
-  const typeArray = file.mimetype.split("/");
-  const fileType = typeArray[1];
 
-  if (fileType == "jpg" || fileType == "png" || fileType == "jpeg") {
-    req.fileValidationError = null;
-    cb(null, true);
+const fileFilter = (req, file, cb) => {
+  const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+  if (!allowedTypes.includes(file.mimetype)) {
+    cb(new Error('Only jpg, png and jpeg format allowed!'), false);
   } else {
-    req.fileValidationError = "jpg,jpeg,png 파일만 업로드 가능합니다.";
-    cb(null, false);
+    cb(null, true);
   }
 };
 
-
 const myprofileUploadMiddleware = multer({
-  storage: storage,
+  storage: upload,
   fileFilter: fileFilter,
   limits: {
-    // fileSize: 10 * 1024 * 1024 //크기 제한 : 10MB
+    fileSize: 10 * 1024 * 1024 //크기 제한 : 10MB
   },
 });
 
@@ -75,19 +99,23 @@ function authenticateToken(req,res,next){
 }
 
 //자기소개 페이지 업로드 처리Handler
-router.post("/myprofile",authenticateToken,myprofileUploadMiddleware.single('photo'),verifyHotelAdmin,(req,res)=>{
+router.post("/myprofile",authenticateToken,myprofileUploadMiddleware.single('photo'),verifyHotelAdmin,async(req,res)=>{
   const userId = req.user.id;
-  const photoPath = '/myProfile/' + req.file.filename;
+  const photoPath = req.file.location; // S3에 저장된 파일 URL
   const { introText } = req.body;
 
   // DB에 profile 정보 저장
   const query = "INSERT INTO hotelAdminProfiles (user_id, introText, photoPath) VALUES (?, ?, ?)";
 
   db.query(query,[userId, introText,photoPath], (error)=>{
+    
     if(error){
       console.error(error);
+        // AWS S3 버킷 객체 목록 가져오기
+      getBucketObjects();        
       return res.status(500).json({message:"서버오류다이자식아"});
     }
+  getBucketObjects();
   res.status(200).json({message:"자기소개 페이지가 성공적으로 업로드되었습니다."})
   })
 });
@@ -111,7 +139,8 @@ router.get("/myprofile/:userId", async(req,res) =>{
     }
 
     const profileInfo = results[0];
-    
+    profileInfo.photoPath = profileInfo.photoPath; // S3에 저장된 이미지 URL
+
     res.status(200).json(profileInfo);
   });
 });

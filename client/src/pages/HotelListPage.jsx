@@ -1,8 +1,8 @@
-// client/src/pages/HotelListPage.jsx
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { HotelListContainer, HotelListWrapper, HotelSortButton, HotelSortContainer, Line } from "../components/pagestyles/HotelListStyle";
+import MainHeader from "../components/shared/header/MainHeader";
 import HotelCard from '../components/hotel/HotelCard';
 import SearchBar from "../components/hotel/search/SearchBar";
 import HotelComparison from "../components/hotel/comparison/HotelComparison";
@@ -54,8 +54,9 @@ export default function HotelListPage() {
 
   return (
     <HotelListContainer>
+      <MainHeader bgColor="#f9f9f9"/>
       <SearchBar onSearch={setSearchTerm} />
-      <MainCategory />
+      <MainCategory bgColor="#f9f9f9" />
 
       <Line />
 
