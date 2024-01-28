@@ -28,6 +28,7 @@ import { MypageLayout,
         HotelDesc,
         } from "../components/pagestyles/MyPageStyle";
 import MainHeader from '../components/shared/header/MainHeader';
+import EditHotel from '../components/hotel/EditHotel';
 
 
 export default function Mypage() {

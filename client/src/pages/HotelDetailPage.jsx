@@ -27,6 +27,7 @@ import MainHeader from '../components/shared/header/MainHeader';
 import AWS from 'aws-sdk';
 import Modal from 'react-modal';
 import CheckHotelAdminProfile from './CheckHotelAdminProfile';
+import EditHotel from '../components/hotel/EditHotel';
 
 
 Modal.setAppElement("#root");
@@ -206,7 +207,6 @@ if(!hotel){
         <Line />
         <HotelPayment hotel={hotel}/>
         <Map address={hotel.hotelAddress}/>
-
 
       </HotelContiner>
     </HotelLayout>
