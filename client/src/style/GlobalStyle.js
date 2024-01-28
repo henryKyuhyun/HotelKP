@@ -63,10 +63,10 @@ const GlobalStyle = createGlobalStyle`
   }
     
   .react-datepicker__day-name {
-   margin:6px;
-   color:#BDBDBD;
-   font-size: 12px;
-   font-weight: 600;
+    margin:6px;
+    color:#BDBDBD;
+    font-size: 12px;
+    font-weight: 600;
   }
   
   .react-datepicker__day {
@@ -113,15 +113,13 @@ const GlobalStyle = createGlobalStyle`
     top: 40px;
     }
 
-   .react-datepicker__month-container {
-     margin: auto;
-   }
+  .react-datepicker__month-container {
+    margin: auto;
+  }
 
-   .react-datepicker__day--outside-month {
-     visibility: hidden;
-   }
-
-
+  .react-datepicker__day--outside-month {
+    visibility: hidden;
+  }
 `;
 
   export default GlobalStyle;

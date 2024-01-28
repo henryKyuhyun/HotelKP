@@ -39,12 +39,9 @@ export default function MainPage() {
             <MainP>빠르고 간편하게 세우는 여행 계획<br/>
 테마를 선택하고 대한민국 최고의 여행지로 떠나보세요</MainP>
             <CardContainer>
-                
             <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%',margin: '50px 0' }}>
                     {hotelList.map((hotel, index) => (
-                    // <HotelCard style={{width:'calc(100% / 5)', marginTop: '50px', marginRight: '50px', marginBottom: '50px', marginLeft: '50px'  }} key={index} hotel={hotel} />
                     <HotelCard style={{width:'calc(20% - 40px)', marginTop: '50px', marginRight: '20px', marginBottom: '50px', marginLeft: '20px'  }} key={index} hotel={hotel} />
-
                     ))}
                     
                 </div>
