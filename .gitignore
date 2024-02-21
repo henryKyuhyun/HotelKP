@@ -26,6 +26,7 @@ node_modules
 /client/.env
 # Ignore cache files
 **/.cache
+/client/node_modules/.cache/default-development/
 
 
 npm-debug.log*
