@@ -3,6 +3,8 @@
 # dependencies
 /node_modules
 node_modules
+/client/node_modules
+
 /.pnp
 .pnp.js
 
@@ -20,7 +22,7 @@ node_modules
 .env.production.local
 
 # environment configurations
-/.env
+.env
 /server/.env
 /client/.env
 
