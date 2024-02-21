@@ -12,10 +12,8 @@ export default function UploadHotelPage() {
   const[hotelInfo, setHotelInfo] = useState("");
   const [hotelSubInfo, setHotelSubInfo] = useState("");
   const [maxGuests, setMaxGuests] = useState('0');
-
-  const[hotelType, setHotelType] = useState("motel");
+  const [hotelType, setHotelType] = useState("motel");
   const [hotelregion, setRegion] = useState("seoul");
-
   const[hotelAddress, setHotelAddress] = useState("");
   const[price, setPrice] = useState("");
   const[hotelImages, setHotelImages] = useState([]);

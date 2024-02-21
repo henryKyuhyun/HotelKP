@@ -12,7 +12,6 @@ import {
 } from "./HeaderStyle";
 import { resetLikes } from "../../../redux/slice/likeSlice"; 
 import Sidebar from './Sidebar';
-import WithdrawalPart from '../../hotel/users/WithdrawalPart';
 
 export default function MainHeader({ bgColor }) {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -75,7 +74,6 @@ export default function MainHeader({ bgColor }) {
           )}
           {isLoggedIn && (
             <>
-                <WithdrawalPart />
                 <CenteredLink to="/" onClick={handleLogout} style={{cursor: 'pointer'}}>로그아웃</CenteredLink>
                 <CenteredLink to="/mypage">마이페이지</CenteredLink>
               {userRole === "hotel_admin" && (

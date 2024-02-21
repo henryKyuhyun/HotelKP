@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Modal from 'react-modal';
 import { FaRegHeart } from 'react-icons/fa';
 import { FaRegCreditCard } from "react-icons/fa";
 import { MdOutlineModeComment } from "react-icons/md";
@@ -185,3 +186,24 @@ export const HotelDesc = styled.span`
     font-size: 15px;
     font-weight: 700;
 `;
+
+export const overlayStyle = {
+  backgroundColor: "rgba(0, 0, 0, 0.5)",
+  zIndex: 1000,
+};
+
+export const contentStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "100%",
+  height:"110%",
+  maxWidth: "600px",
+  maxHeight: "80%",
+  overflow: "auto",
+  border: "none",
+  borderRadius: "8px",
+  outline: "none",
+  padding: "20px",
+};

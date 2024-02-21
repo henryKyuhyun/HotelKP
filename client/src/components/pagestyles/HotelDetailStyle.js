@@ -156,4 +156,3 @@ export const CancelButton = styled.button`
       background-color: #FB5946;
     }
 `;
-

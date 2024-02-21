@@ -32,6 +32,12 @@ border: 1px solid #dddbd6;
 border-radius: 20px;
 `;
 
+export const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const LinkTitle = styled(Link)`
   margin-right: 20px;
   font-size: 30px;

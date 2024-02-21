@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Like from '../components/shared/like/Like';
 import HotelPayment from '../components/hotel/HotelPayment';
 import {HotelLayout,
@@ -15,20 +15,16 @@ import {HotelLayout,
         HeaderLeft,
         HeaderRight,
         MainImg,
-        HostBtn,
-        AdminInfo} from '../components/pagestyles/HotelDetailStyle'        
+        } from '../components/pagestyles/HotelDetailStyle'        
 import CommentContainer from '../components/hotel/comment/CommentContainer';
 import { FaStar } from 'react-icons/fa';
-import { BsPersonFill } from 'react-icons/bs';
 import Map from '../components/map/Map';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteHotel } from '../redux/hotelActions';
 import MainHeader from '../components/shared/header/MainHeader';
 import AWS from 'aws-sdk';
 import Modal from 'react-modal';
 import CheckHotelAdminProfile from './CheckHotelAdminProfile';
-import EditHotel from '../components/hotel/EditHotel';
-
 
 Modal.setAppElement("#root");
 
@@ -36,9 +32,8 @@ export default function HotelDetailPage() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-  const userId = loggedInUser.id;
+  const isLoggedIn = useSelector((state) => state.auth?.isLoggedIn);
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   const {hotelId} = useParams();
   const [hotel,setHotel] = useState(null);
@@ -46,6 +41,7 @@ export default function HotelDetailPage() {
   const [mainImageIndex, setMainImageIndex] = useState(0);
   const [isShowMore, setIsShowMore] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   AWS.config.update({
     region: process.env.AWS_REGION,
@@ -53,6 +49,17 @@ export default function HotelDetailPage() {
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
   })
   const s3 = new AWS.S3();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      const storedUser = localStorage.getItem('loggedInUser');
+      setLoggedInUser(JSON.parse(storedUser));
+      
+    } else {
+      setLoggedInUser(null);
+    }
+  }, [isLoggedIn]);
+
 
   useEffect(() =>{
     fetchHotelDetail();
@@ -75,7 +82,6 @@ const processImages = (imagePath) => {
     if (typeof imagePath === 'string' && imagePath.trim().charAt(0) === '[') {
       const parsedImages = JSON.parse(imagePath);
       if (Array.isArray(parsedImages) && parsedImages.length > 0) {
-        // return parsedImages.map((image) => image.replace('hotelImage/', '')); 이부분은 local 에서 이미지를 불러올때 필요한거
         return parsedImages;
       }
     } else {
@@ -92,9 +98,15 @@ const processImages = (imagePath) => {
   };
 
   const deleteMyHotel = () => {
-    if (window.confirm("호텔을 삭제하시겠습니까?")) {
-      dispatch(deleteHotel({hotel_id:hotelId}));
-      navigate("/");
+    if(window.confirm("삭제하시겠습니까?")) {
+      dispatch(deleteHotel({hotel_id:hotelId}))
+      .then(response => {
+        if(response.error) {
+          setErrorMessage("권한이 없어서 삭제가 안됩니다!",response.error.message);
+        } else {
+          navigate("/");
+        }
+      });
     }
   }
 
@@ -121,7 +133,7 @@ if(!hotel){
       {imagePaths.map((imagePath, index) => (
           <img
             key={index}
-            src={imagePath} // 변경된 부분
+            src={imagePath}
             alt={`${hotel.hotelName}-${index}`}
             onClick={() => changeMainImage(index)}
             style={{ cursor: "pointer", width: "100px", height: "100px", marginRight: "10px", marginBottom: "10px" }}
@@ -138,21 +150,21 @@ if(!hotel){
                 {
                   (hotel.average_score === null ? 0 : hotel.average_score)
                 }
-              <BsPersonFill style={{ marginLeft: "10px" }} fontSize="18px"/>
+                            <button onClick={openModal}>
+                <CheckHotelAdminProfile userId={hotel.user_id} page={'hotelDetailPage'} />
+            </button>     
               <span>{hotel.user_id}</span>
               <HotelPrice>₩{hotel.price} /박</HotelPrice>
               <Like hotel_id={hotelId} hotel_owner_id={hotel.user_id}/>
             </HeaderLeft>
             <HeaderRight>
-              {
-                (userId === hotel.user_id ? <CancelButton onClick={deleteMyHotel}> 삭제하기 </CancelButton>: null)
-              }
-            </HeaderRight>
-            {/* <HostBtn to={`/adminProfile/${hotel.user_id}`}>호스트정보</HostBtn> */}
-
-            
-            <button onClick={openModal}>호스트정보보기</button>
-
+  {isLoggedIn && loggedInUser && (
+    <>
+    <CancelButton onClick={deleteMyHotel}> 삭제하기 </CancelButton>
+    {errorMessage && <p>{errorMessage}</p>}
+    </>
+  )}
+</HeaderRight>
             <Modal
   isOpen={isModalOpen}
   onRequestClose={closeModal}
@@ -180,7 +192,8 @@ if(!hotel){
   contentLabel="Hotel Admin Profile Modal"
 >
   <button onClick={closeModal}>닫기</button>
-  <CheckHotelAdminProfile userId={hotel.user_id} />
+            <CheckHotelAdminProfile userId={hotel.user_id} />
+
 </Modal>
 
           </div>
@@ -209,6 +222,7 @@ if(!hotel){
         <Map address={hotel.hotelAddress}/>
 
       </HotelContiner>
+
     </HotelLayout>
   );
 }

@@ -1,5 +1,5 @@
-// client/src/components/hotel/HotelCard.jsx
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import {
   HotelAddress,
   HotelContainer,
@@ -14,7 +14,8 @@ import {
 } from '../pagestyles/HotelListStyle';
 import Like from '../shared/like/Like';
 import { FaStar } from 'react-icons/fa';
-import { Dot, Indicator, IndicatorHotelCard } from '../shared/banner/BannerStyle';
+import { Dot, IndicatorHotelCard } from '../shared/banner/BannerStyle';
+  
 
 export default function HotelCard({ hotel, showEditButton, onEditButtonClick, onHotelSelect, selectedHotelIds = [] }) {
   const processImages = (imagePath) => {
@@ -22,7 +23,6 @@ export default function HotelCard({ hotel, showEditButton, onEditButtonClick, on
       if (typeof imagePath === 'string' && imagePath.trim().charAt(0) === '[') {
         const parsedImages = JSON.parse(imagePath);
         if (Array.isArray(parsedImages) && parsedImages.length > 0) {
-          // return parsedImages.map((image) => image.replace('hotelImage/', '')); 이부분은 local 에서 이미지를 불러올때 필요한거
           return parsedImages;
         }
       } else {
@@ -31,10 +31,15 @@ export default function HotelCard({ hotel, showEditButton, onEditButtonClick, on
     }
     return [];
   };
-
+  const [imageURLs, setImageURLs] = useState(processImages(hotel.hotelImages)); // 초기 이미지 URL 상태 설정
   const imagePaths = processImages(hotel.hotelImages);
   const [isSelected, setIsSelected] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    setImageURLs(processImages(hotel.hotelImages)); // hotel.hotelImages가 변경될 때마다 imageURLs 업데이트
+  }, [hotel.hotelImages]);
+
   const moveToRight = () =>{
     setCurrentIndex((prev) => (prev + 1) % imagePaths.length);
   };
@@ -49,23 +54,19 @@ export default function HotelCard({ hotel, showEditButton, onEditButtonClick, on
       onHotelSelect(hotel.hotel_id, !isSelected);
     }
   };
+  
 
 return (
   <HotelContainer key={hotel.hotel_id}>
     <HotelImageWrapper>
     <ImageLeftButton onClick={moveToLeft}> {"<"} </ImageLeftButton>
-
-      {/* HotelImage 에 onClick moveToRight 을 넣어서 사진을 클릭해도 가능하게  */}
-      {/* <HotelImage src={`/hotelImage/${imagePaths[currentIndex]}`} alt={hotel.hotelName} onClick={moveToRight} />   */}
-      <HotelImage src={imagePaths[currentIndex]} alt={hotel.hotelName} onClick={moveToRight} />
+      <HotelImage src={imageURLs[currentIndex]} alt={hotel.hotelName} onClick={moveToRight} />
 
       <Like hotel_id={hotel.hotel_id} hotel_owner_id={hotel.user_id} />
       <ImageRightButton  onClick={moveToRight}>{">"}</ImageRightButton>
       <IndicatorHotelCard>
       {imagePaths.map((_,index) => (
-        // TODO : 여기1
       <Dot key={index} $active={currentIndex === index} onClick={() => setCurrentIndex(index)} />
-      // <Dot key={index} className={currentIndex === index ? "active":""} onClick={() => setCurrentIndex(index)} />
       ))}
     </IndicatorHotelCard>
     </HotelImageWrapper>
@@ -84,7 +85,7 @@ return (
     <ViewDetailsLink to={`/hotel/${hotel.hotel_id}`}>상세보기👀</ViewDetailsLink>
     <input type="checkbox" checked={isSelected} onChange={handleSelect} disabled={selectedHotelIds.length >= 3 && !isSelected} />
     {showEditButton && (
-      <button onClick={() => onEditButtonClick(hotel.hotel_id)}>비교하기</button>
+      <button onClick={() => onEditButtonClick(hotel.hotel_id)}>수정하기</button>
     )}
   </HotelContainer>
 );

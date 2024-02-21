@@ -65,9 +65,6 @@ const upload = multer({
 
   router.post('/uploadHotel', authMiddleware, upload.any("hotelImages"), async(req, res) => {
 
-  console.log("Request body", req.body);
-  console.log("Request files", req.files);
-
   if (req.files.length > UploadMaxImages) {
     return res.status(400).json({ error: `최대 ${UploadMaxImages}개의 이미지 파일만 업로드 가능합니다.` });
   } 
