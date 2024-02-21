@@ -3,9 +3,15 @@
 # dependencies
 node_modules
 /client/node_modules
+/node_modules
 
 /.pnp
 .pnp.js
+
+
+# eslint cache
+.eslintcache
+
 
 # testing
 /coverage
